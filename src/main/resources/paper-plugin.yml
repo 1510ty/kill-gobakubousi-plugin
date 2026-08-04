@@ -1,0 +1,5 @@
+name: ItemKillCommand #サーバー内(/pluginsなど)で目にする名前
+version: "${version}" #バージョン指定
+main: com.yukkurihimatubus.ItemKillCommand.Main #プラグイン読み込みにに実行するクラス
+api-version: '26.2' #APIバージョン指定
+folia-supported: true #Foliaをサポートしてるよ
