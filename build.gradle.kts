@@ -21,7 +21,7 @@ plugins {
 //グループID
 group = "com.yukkurihimatubus"
 //version
-version = "1.0"
+version = "1.1"
 
 //使用するリポジトリを指定
 repositories {
