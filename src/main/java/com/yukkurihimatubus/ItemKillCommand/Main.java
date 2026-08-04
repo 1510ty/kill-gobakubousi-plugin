@@ -16,6 +16,7 @@
 
 package com.yukkurihimatubus.ItemKillCommand;
 
+import io.papermc.paper.command.brigadier.Commands;
 import io.papermc.paper.plugin.lifecycle.event.types.LifecycleEvents;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -27,16 +28,24 @@ public class Main extends JavaPlugin {
         getLogger().info("開発: yukkurihimatubus");
         getLogger().info("ほんのちょっとだけ手助け: 1510ty");
 
+        executeCommand executecmd = new executeCommand(); //実体化
+
         //コマンドを登録
         getLifecycleManager().registerEventHandler(
                 LifecycleEvents.COMMANDS,
                 event -> {
                     event.registrar().register(
-                            "itemkill", // 「/itemkill」コマンド名を指定
-                            "落ちているアイテムを削除", //説明
-                            new executeCommand() //実際の動作
+                            Commands.literal("itemkill")
+                                    .requires(source -> source.getSender().hasPermission("itemkill.use")) // ここで権限を設定すると非表示になります！
+                                    .executes(context -> {
+                                        executecmd.execute(context);
+                                        return 1;
+                                    })
+                                    .build(),
+                            "落ちているアイテムを削除"
                     );
                 }
         );
     }
+
 }
