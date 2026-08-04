@@ -16,7 +16,7 @@
 
 package com.yukkurihimatubus.ItemKillCommand;
 
-import io.papermc.paper.command.brigadier.BasicCommand;
+import com.mojang.brigadier.context.CommandContext;
 import io.papermc.paper.command.brigadier.CommandSourceStack;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -24,11 +24,14 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.Item;
 
 //BasicCommandに準じて実装
-public class executeCommand implements BasicCommand {
+public class executeCommand{
 
     //「/itemkill」コマンド実行時の実際の動作
-    @Override
-    public void execute(CommandSourceStack source, String[] args) {
+    public void execute(CommandContext<CommandSourceStack> context) {
+
+        var sender = context.getSource().getSender(); //senderを取得
+
+
 
         //アイテムの数を保持する変数
         long count = 0;
@@ -46,11 +49,11 @@ public class executeCommand implements BasicCommand {
         }
 
         if (count > 0) { //カウントが1以上ならば
-            source.getSender().sendMessage(
+            sender.sendMessage(
                     "§7落ちているアイテムを" + count + "個削除しました" //削除したよ
             );
         } else { //ではないなら
-            source.getSender().sendMessage(
+            sender.sendMessage(
                     "§7落ちているアイテムが無かったためアイテムを削除できませんでした。" //無理だった
             );
         }
